@@ -6,6 +6,10 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func addMealPressed(_ sender: UIButton) {
+        //segue set up
+    }
+    
+    @IBAction func viewMealsPressed(_ sender: UIButton) {
         //segue already set up
     }
     

@@ -12,11 +12,33 @@ class AddMealViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var servesTextField: UITextField!; private var mealServing : Int = 0
     @IBOutlet weak var imageView: UIImageView!
     
-    //URL used to save image
-    var stringURL : String = ""
-    
     let realm = try! Realm()
+    var fileName : String = ""
 
+    func saveToDirectory(image: UIImage) {
+        //Get the Documents Directory URL
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
+        //need to randomise
+        let name = String(Date().timeIntervalSinceReferenceDate)
+        fileName = "\(name).jpg"
+
+        let destinationURL = documentsDirectory.appendingPathComponent(fileName)
+        
+        //Create jpeg Data representation and check if the destination url already exists
+        if let data = image.jpegData(compressionQuality:  1.0) {
+            //Check if destinationURL already exists
+            if !FileManager.default.fileExists(atPath: destinationURL.path) {
+                do {
+                    try data.write(to: destinationURL)
+                    print("Image saved")
+                } catch {
+                    print("Error saving file:", error)
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +65,8 @@ class AddMealViewController: UIViewController, UINavigationControllerDelegate {
         let actionSheet = UIAlertController(title: "Photo source", message: "Choose a source", preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action:UIAlertAction) in
-            //Check if camera can be used
+            
+            //Checks if camera can be used
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 imagePickerController.sourceType = .camera
                 self.present(imagePickerController, animated: true, completion: nil)
@@ -68,7 +91,6 @@ class AddMealViewController: UIViewController, UINavigationControllerDelegate {
     @IBAction func addPressed(_ sender: UIButton) {
         if let text1 = titleTextField.text, let text2 = timingTextField.text, let text3 = cuisineTextField.text, let text4 = servesTextField.text, let text5 = mainIngredientTextField.text, let text6 = recipeTextView.text {
             
-            
             //textField.text gives optional String so using optional binding
             mealName = text1
             mealTiming = text2
@@ -80,6 +102,11 @@ class AddMealViewController: UIViewController, UINavigationControllerDelegate {
         
         saveData(mealName, mealTiming, mealCuisine, mealServing, mealMainIngredient, mealRecipe)
         
+        let alert = UIAlertController(title: "Recipe added", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+        
         //resetting all the fields to blank
         titleTextField.text = ""
         timingTextField.text = ""
@@ -88,6 +115,7 @@ class AddMealViewController: UIViewController, UINavigationControllerDelegate {
         cuisineTextField.text = ""
         mainIngredientTextField.text = ""
         servesTextField.text = ""
+        imageView.image = nil
     }
 
     func saveData(_ mealName: String, _ mealTiming: String, _ mealCuisine: String, _ mealServing: Int, _ mealMainIngredient: String, _ mealRecipe: String) {
@@ -100,7 +128,7 @@ class AddMealViewController: UIViewController, UINavigationControllerDelegate {
                 newMeal.serving = mealServing
                 newMeal.mainIngredient = mealMainIngredient
                 newMeal.recipe = mealRecipe
-                newMeal.imageFilePath = stringURL
+                newMeal.imageFilePath = fileName
                 realm.add(newMeal)
             }
         } catch {
@@ -131,7 +159,6 @@ extension AddMealViewController : UITextViewDelegate {
     }
 }
 
-
 //MARK: - TextFieldDelegate Methods
 extension AddMealViewController : UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
@@ -145,7 +172,6 @@ extension AddMealViewController : UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
-        print(textField.text!)
         return true
     }
 }
@@ -154,12 +180,11 @@ extension AddMealViewController : UITextFieldDelegate {
 
 extension AddMealViewController : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        
-        let nsUrl = info[UIImagePickerController.InfoKey.imageURL] as! NSURL
-        stringURL = nsUrl.absoluteString ?? ""
-        
         imageView.image = image
+        saveToDirectory(image: image!)
+
         picker.dismiss(animated: true, completion: nil)
     }
     

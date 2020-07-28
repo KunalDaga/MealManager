@@ -16,6 +16,7 @@
 		0C611A902451472D00247957 /* AddMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C611A8F2451472D00247957 /* AddMealViewController.swift */; };
 		0C611A922451473B00247957 /* RandomMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C611A912451473B00247957 /* RandomMealViewController.swift */; };
 		0C884F2324514B550023CAD7 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C884F2224514B550023CAD7 /* Meal.swift */; };
+		0C8EE9F524C86BD500A82E39 /* MealsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8EE9F424C86BD500A82E39 /* MealsTableViewCell.swift */; };
 		0CC0CFC62451DDCE00D02D65 /* ViewMealsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC0CFC52451DDCE00D02D65 /* ViewMealsTableViewController.swift */; };
 		0CC0CFC82451DDFC00D02D65 /* ViewMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC0CFC72451DDFC00D02D65 /* ViewMealViewController.swift */; };
 		7C2D498C68D952F9E9049C74 /* Pods_MealManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A99BDC9762DEF64EA965112 /* Pods_MealManager.framework */; };
@@ -33,6 +34,7 @@
 		0C611A8F2451472D00247957 /* AddMealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealViewController.swift; sourceTree = "<group>"; };
 		0C611A912451473B00247957 /* RandomMealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMealViewController.swift; sourceTree = "<group>"; };
 		0C884F2224514B550023CAD7 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		0C8EE9F424C86BD500A82E39 /* MealsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsTableViewCell.swift; sourceTree = "<group>"; };
 		0CC0CFC52451DDCE00D02D65 /* ViewMealsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMealsTableViewController.swift; sourceTree = "<group>"; };
 		0CC0CFC72451DDFC00D02D65 /* ViewMealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMealViewController.swift; sourceTree = "<group>"; };
 		1A99BDC9762DEF64EA965112 /* Pods_MealManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MealManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				0C884F2224514B550023CAD7 /* Meal.swift */,
+				0C8EE9F424C86BD500A82E39 /* MealsTableViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				0CC0CFC62451DDCE00D02D65 /* ViewMealsTableViewController.swift in Sources */,
 				0C884F2324514B550023CAD7 /* Meal.swift in Sources */,
 				0C611A922451473B00247957 /* RandomMealViewController.swift in Sources */,
+				0C8EE9F524C86BD500A82E39 /* MealsTableViewCell.swift in Sources */,
 				0C611A902451472D00247957 /* AddMealViewController.swift in Sources */,
 				0C24A12E2451461D00D43257 /* AppDelegate.swift in Sources */,
 				0C24A1302451461D00D43257 /* SceneDelegate.swift in Sources */,
